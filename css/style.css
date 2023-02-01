@@ -65,6 +65,7 @@ html {
 .label__input {
     padding: 5px;
     border-radius: 5px;
+    max-width: 80%;
 }
 
 .form__label--special {
