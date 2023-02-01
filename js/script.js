@@ -64,25 +64,27 @@
             default:
                 return 1 * money;
         }
-
     }
+    const updateTextResult = (result, outputCurrencyElement) => {
+        const resultElement = document.querySelector(".js-result");
+        resultElement.innerText = `${result.toFixed(2)} ${outputCurrencyElement.value}`;
+    }
+
+    const onFormSubmit = (event) => {
+        event.preventDefault();
+        const inputCurrencyElement = document.querySelector(".js-inputCurrency");
+        const outputCurrencyElement = document.querySelector(".js-outputCurrency");
+        const primaryElement = document.querySelector(".js-label");
+
+        const currencyPair = `${inputCurrencyElement.value}/${outputCurrencyElement.value}`;
+        const money = +primaryElement.value;
+        const result = calculateResult(currencyPair, money);
+        updateTextResult(result, outputCurrencyElement);
+    };
 
     const init = () => {
         const formElement = document.querySelector(".js-form");
-        formElement.addEventListener("submit", (event) => {
-            event.preventDefault();
-            const inputCurrencyElement = document.querySelector(".js-inputCurrency");
-            const outputCurrencyElement = document.querySelector(".js-outputCurrency");
-            const primaryElement = document.querySelector(".js-label");
-            const resultElement = document.querySelector(".js-result");
-            const currencyPair = `${inputCurrencyElement.value}/${outputCurrencyElement.value}`;
-            const money = +primaryElement.value
-            const result = calculateResult(currencyPair, money);
-            resultElement.innerText = `${result.toFixed(2)} ${outputCurrencyElement.value}`;
-
-        });
+        formElement.addEventListener("submit", onFormSubmit);
     }
-
     init();
-
 }
